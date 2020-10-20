@@ -84,7 +84,7 @@ class ContactController {
             return $this->notFoundResponse();
         }
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (! $this->validateContact($input)) {
+        if (! $this->validateContactEmail($input)) {
             return $this->unprocessableEntityResponse();
         }
         $this->contactsGateway->update($id, $input);
@@ -95,7 +95,26 @@ class ContactController {
 
     private function validateContact($input)
     {
-        //
+        if (! isset($input['name'])) {
+            return false;
+        }
+        if (! isset($input['email']) || !filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        if (! isset($input['phone'])) {
+            return false;
+        }
+        if (! isset($input['address'])) {
+            return false;
+        }
+        return true;
+    }
+
+    private function validateContactEmail($input)
+    {
+        if (! isset($input['email']) || !filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
         return true;
     }
 
