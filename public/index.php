@@ -1,6 +1,6 @@
 <?php
 // Serve as our front controller and process the requests
-
+include 'vendor/autoload.php';
 use Src\Controller\ContactController;
 
 header("Access-Control-Allow-Origin: *");
@@ -27,6 +27,6 @@ if (isset($uri[2])) {
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
-// pass the request method and user ID to the PersonController and process the HTTP request:
+// pass the request method and user ID to the ContactController and process the HTTP request:
 $controller = new ContactController($dbConnection, $requestMethod, $userId);
 $controller->processRequest();
