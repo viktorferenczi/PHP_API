@@ -95,7 +95,7 @@ class ContactController {
 
     private function validateContact($input)
     {
-       //logic
+        //
         return true;
     }
 

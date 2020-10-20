@@ -76,10 +76,7 @@ class ContactsGateway {
         $statement = "
             UPDATE contacts
             SET 
-                name = :name,
-                email  = :email,
-                phone = :phone,
-                address = :address
+                email  = :email
             WHERE id = :id;
         ";
 
@@ -87,10 +84,7 @@ class ContactsGateway {
             $statement = $this->db->prepare($statement);
             $statement->execute(array(
                 'id' => (int) $id,
-                'name' => $input['name'],
                 'email'  => $input['email'],
-                'phone' => $input['phone'],
-                'address' => $input['address'],
             ));
             return $statement->rowCount();
         } catch (\PDOException $e) {
