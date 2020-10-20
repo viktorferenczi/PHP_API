@@ -20,6 +20,10 @@ class ContactController {
         $this->contactsGateway = new ContactsGateway($db);
     }
 
+
+    /*
+     * Process the incoming request and get a response from it 
+     */
     public function processRequest()
     {
         switch ($this->requestMethod) {
@@ -46,6 +50,10 @@ class ContactController {
         }
     }
 
+
+    /*
+     * Get all contacts. 
+     */
     private function getAllContacts()
     {
         $result = $this->contactsGateway->findAll();
@@ -54,6 +62,10 @@ class ContactController {
         return $response;
     }
 
+
+    /*
+     * Get contact by id. 
+     */
     private function getContact($id)
     {
         $result = $this->contactsGateway->find($id);
@@ -65,6 +77,10 @@ class ContactController {
         return $response;
     }
 
+
+    /*
+     * Create contact 
+     */
     private function createContactFromRequest()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
@@ -77,6 +93,10 @@ class ContactController {
         return $response;
     }
 
+
+    /*
+     * Update contact by id. 
+     */
     private function updateContactFromRequest($id)
     {
         $result = $this->contactsGateway->find($id);
@@ -93,6 +113,10 @@ class ContactController {
         return $response;
     }
 
+
+    /*
+     * Validate contact details. 
+     */
     private function validateContact($input)
     {
         if (! isset($input['name'])) {
@@ -110,6 +134,9 @@ class ContactController {
         return true;
     }
 
+    /*
+     * Validate the contact email. 
+     */
     private function validateContactEmail($input)
     {
         if (! isset($input['email']) || !filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
@@ -118,15 +145,22 @@ class ContactController {
         return true;
     }
 
+    /*
+     * Return 422 error code. 
+     */
     private function unprocessableEntityResponse()
     {
         $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
         $response['body'] = json_encode([
-            'error' => 'Invalid input'
+            'error' => 'Invalid input!'
         ]);
         return $response;
     }
 
+
+    /*
+     * Return 404 error code. 
+     */
     private function notFoundResponse()
     {
         $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
