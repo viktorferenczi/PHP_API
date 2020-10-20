@@ -51,7 +51,7 @@ class ContactsGateway {
     public function insert(Array $input)
     {
         $statement = "
-            INSERT INTO person 
+            INSERT INTO contacts 
                 (name, email, phone, address)
             VALUES
                 (:name, :email, :phone, :address);
@@ -74,7 +74,7 @@ class ContactsGateway {
     public function update($id, Array $input)
     {
         $statement = "
-            UPDATE person
+            UPDATE contacts
             SET 
                 name = :name,
                 email  = :email,

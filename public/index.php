@@ -1,6 +1,6 @@
 <?php
 // Serve as our front controller and process the requests
-include 'vendor/autoload.php';
+require "../bootstrap.php";
 use Src\Controller\ContactController;
 
 header("Access-Control-Allow-Origin: *");
