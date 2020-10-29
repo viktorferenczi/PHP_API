@@ -1,4 +1,4 @@
-# Delocal - TESTAPI
+# TESTAPI
 
 REST API with Create,Read,Update functions. 
 Using HTTP request methods GET,POST,PUT handled with Front Controller Design Pattern.
